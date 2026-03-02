@@ -140,13 +140,15 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const TSTART = new Date('2026-03-06T08:00:00-05:00');
 
 const GROUPS = {
-    group1:{label:'Group 1',tier:'1',golfers:['Ben Griffin','Jacob Bridgeman']},
-    group2:{label:'Group 2',tier:'2',golfers:['Adam Scott','Shane Lowry','Taylor Pendrith']},
-    group3:{label:'Group 3',tier:'3',golfers:['Michael Thorbjornsen','Nicolai Hojgaard','Rasmus Hojgaard','Ryan Gerard']},
-    group4:{label:'Group 4',tier:'4',golfers:['Brooks Koepka','Daniel Berger','Davis Thompson','Keith Mitchell','Rasmus Neergaard-Petersen']},
-    group5:{label:'Group 5',tier:'5',golfers:['Aaron Rai','Alex Smalley','Christiaan Bezuidenhout','Max Homa','Thorbjorn Olesen','Will Zalatoris']},
-    group6:{label:'Group 6',tier:'6',golfers:['Chris Kirk','Haotong Li','John Keefer','Jordan Smith','Kristoffer Reitan','Mac Meissner','Mackenzie Hughes','Max McGreevy','Patrick Rodgers','Rico Hoey','Stephan Jaeger']},
-    wildcard:{label:'Wild Card',tier:'wc',golfers:['A.J. Ewart','Aaron Wise','Adam Schenk','Adam Svensson','Adrien Dumont De Chassart','Adrien Saddier','Alejandro Tosti','Andrew Putnam','Austin Eckroat','Austin Smotherman','Beau Hossler','Billy Horschel','Blades Brown','Brice Garnett','Brendon Todd','Camilo Villegas','Cameron Davis','Chad Ramey','Chandler Blanchet','Chandler Phillips','Charley Hoffman','Christo Lamprecht','Danny Walker','Danny Willett','David Ford','David Lipsky','Davis Chatfield','Davis Riley','Doug Ghim','Dylan Wu','Emiliano Grillo','Eric Cole','Erik Van Rooyen','Garrick Higgo','Gary Woodland','Gordon Sargent','Hank Lebioda','Isaiah Salinda','Jeffrey Kang','Jesper Svensson']}
+    group1:{label:'Group 1',tier:'1',golfers:['Rory McIlroy','Scottie Scheffler']},
+    group2:{label:'Group 2',tier:'2',golfers:['Matt Fitzpatrick','Tommy Fleetwood','Xander Schauffele']},
+    group3:{label:'Group 3',tier:'3',golfers:['Collin Morikawa','Hideki Matsuyama','Russell Henley','Si Woo Kim']},
+    group4:{label:'Group 4',tier:'4',golfers:['Ben Griffin','Cameron Young','Harris English','Patrick Cantlay','Robert MacIntyre']},
+    group5:{label:'Group 5',tier:'5',golfers:['Chris Gotterup','Jake Knapp','Kurt Kitayama','Ludvig Aberg','Sam Burns','Viktor Hovland']},
+    group6:{label:'Group 6',tier:'6',golfers:['Adam Scott','Jason Day','Jordan Spieth','Justin Rose','Justin Thomas','Keegan Bradley','Maverick McNealy','Min Woo Lee','Rickie Fowler','Shane Lowry']},
+    wildcard1:{label:'Wild Card 1',tier:'wc',golfers:['Akshay Bhatia','Aldrich Potgieter','Alex Noren','Andrew Novak','Andrew Putnam','Billy Horschel','Brian Campbell','Brian Harman','Bud Cauley','Chris Kirk','Corey Conners','Daniel Bennett','Daniel Berger','Denny McCarthy','Haotong Li','Harry Hall','J.J. Spaun','J.T. Poston','Jacob Bridgeman','Jhonattan Vegas','Kevin Roy','Lucas Glover','Matt McCarty','Michael Kim','Michael Thorbjornsen','Nick Taylor','Nicolai Hojgaard','Patrick Rodgers','Pierceson Coody','Ryan Fox','Ryan Gerard','Ryo Hisatsune','Sahith Theegala','Sam Stevens','Sepp Straka','Stephan Jaeger','Sungjae Im','Taylor Pendrith','Tom Hoge','Tony Finau']},
+    wildcard2:{label:'Wild Card 2',tier:'wc',golfers:['Akshay Bhatia','Aldrich Potgieter','Alex Noren','Andrew Novak','Andrew Putnam','Billy Horschel','Brian Campbell','Brian Harman','Bud Cauley','Chris Kirk','Corey Conners','Daniel Bennett','Daniel Berger','Denny McCarthy','Haotong Li','Harry Hall','J.J. Spaun','J.T. Poston','Jacob Bridgeman','Jhonattan Vegas','Kevin Roy','Lucas Glover','Matt McCarty','Michael Kim','Michael Thorbjornsen','Nick Taylor','Nicolai Hojgaard','Patrick Rodgers','Pierceson Coody','Ryan Fox','Ryan Gerard','Ryo Hisatsune','Sahith Theegala','Sam Stevens','Sepp Straka','Stephan Jaeger','Sungjae Im','Taylor Pendrith','Tom Hoge','Tony Finau']},
+    wildcard3:{label:'Wild Card 3',tier:'wc',golfers:['Akshay Bhatia','Aldrich Potgieter','Alex Noren','Andrew Novak','Andrew Putnam','Billy Horschel','Brian Campbell','Brian Harman','Bud Cauley','Chris Kirk','Corey Conners','Daniel Bennett','Daniel Berger','Denny McCarthy','Haotong Li','Harry Hall','J.J. Spaun','J.T. Poston','Jacob Bridgeman','Jhonattan Vegas','Kevin Roy','Lucas Glover','Matt McCarty','Michael Kim','Michael Thorbjornsen','Nick Taylor','Nicolai Hojgaard','Patrick Rodgers','Pierceson Coody','Ryan Fox','Ryan Gerard','Ryo Hisatsune','Sahith Theegala','Sam Stevens','Sepp Straka','Stephan Jaeger','Sungjae Im','Taylor Pendrith','Tom Hoge','Tony Finau']}
 };
 
 let participants=[],golferScores={},missedCuts=new Set();
