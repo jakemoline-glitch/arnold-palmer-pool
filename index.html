@@ -388,6 +388,14 @@ function renderPickPopularity(){
     const c=document.getElementById('popularityCharts');
     if(!participants.length){c.innerHTML='<div class="es">No picks yet.</div>';return;}
     
+    // Hide from non-admins before tournament starts
+    if(!visible() && !isAdmin){
+        const cd=TSTART-new Date();
+        const h=Math.floor(cd/36e5),m=Math.floor(cd%36e5/6e4);
+        c.innerHTML=`<div class="es">🔒 Pick popularity hidden until tournament starts<br><span style="font-size:11px;margin-top:8px;display:block">Unlocks in ${h}h ${m}m</span></div>`;
+        return;
+    }
+    
     const counts={};
     Object.keys(GROUPS).forEach(k=>{
         counts[k]={};
