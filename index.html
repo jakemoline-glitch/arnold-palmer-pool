@@ -87,6 +87,7 @@
         <div class="tab active" onclick="switchTab(this,'entry')">📝 Enter Picks</div>
         <div class="tab" onclick="switchTab(this,'all-picks')">👥 All Participants</div>
         <div class="tab" onclick="switchTab(this,'leaderboard')">🏆 Leaderboard</div>
+        <div class="tab" onclick="switchTab(this,'popularity')">📊 Pick Popularity</div>
         <div class="tab" onclick="switchTab(this,'scores-panel')">⛳ Golfer Scores</div>
     </div>
 
@@ -123,6 +124,14 @@
             <thead><tr><th>Rank</th><th>Name</th><th>Score</th><th>Win Pred</th><th>Golfers</th></tr></thead>
             <tbody id="lbBody"></tbody>
         </table>
+    </div>
+
+    <div id="popularity" class="tc panel">
+        <div style="margin-bottom:20px;display:flex;justify-content:space-between;align-items:center">
+            <h2 style="margin:0;font-size:1.5rem">Pick Popularity</h2>
+            <button id="downloadBtn" class="btn" onclick="downloadBackup()" style="display:none">💾 Download Backup</button>
+        </div>
+        <div id="popularityCharts"></div>
     </div>
 
     <div id="scores-panel" class="tc panel">
@@ -360,7 +369,62 @@ function switchTab(el,id){
     document.getElementById(id).classList.add('active');
     if(id==='all-picks')renderAllPicks();
     if(id==='leaderboard')renderLeaderboard();
+    if(id==='popularity')renderPickPopularity();
     if(id==='scores-panel')renderScores();
+}
+
+function downloadBackup(){
+    const data={participants,golferScores,missedCuts:Array.from(missedCuts),timestamp:new Date().toISOString()};
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download=`arnold-palmer-pool-backup-${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function renderPickPopularity(){
+    const c=document.getElementById('popularityCharts');
+    if(!participants.length){c.innerHTML='<div class="es">No picks yet.</div>';return;}
+    
+    const counts={};
+    Object.keys(GROUPS).forEach(k=>{
+        counts[k]={};
+        GROUPS[k].golfers.forEach(g=>counts[k][g]=0);
+    });
+    
+    participants.forEach(p=>{
+        Object.entries(p.picks).forEach(([group,golfer])=>{
+            if(counts[group]&&counts[group][golfer]!==undefined)counts[group][golfer]++;
+        });
+    });
+    
+    let html='';
+    Object.entries(GROUPS).forEach(([key,val])=>{
+        const picked=Object.entries(counts[key]).filter(([g,c])=>c>0).sort((a,b)=>b[1]-a[1]);
+        if(!picked.length)return;
+        
+        const total=picked.reduce((sum,[,c])=>sum+c,0);
+        const colors=['#d4b483','#c9a227','#a0a8b0','#b07040','#7fda9a','#6bc5e8','#c89ff5'];
+        
+        html+=`<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:20px;margin-bottom:20px">`;
+        html+=`<h3 style="margin:0 0 16px 0;color:var(--sand);font-size:1.1rem">${val.label}</h3>`;
+        html+=`<div style="flex:1">`;
+        picked.slice(0,10).forEach(([golfer,count],i)=>{
+            const pct=Math.round(count/total*100);
+            html+=`<div style="margin-bottom:8px">`;
+            html+=`<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">`;
+            html+=`<span>${golfer}</span><span style="color:var(--sand)">${count} picks (${pct}%)</span>`;
+            html+=`</div>`;
+            html+=`<div style="background:rgba(255,255,255,.1);height:8px;border-radius:4px;overflow:hidden">`;
+            html+=`<div style="background:${colors[i%colors.length]};width:${pct}%;height:100%;transition:width 0.3s"></div>`;
+            html+=`</div></div>`;
+        });
+        html+=`</div></div>`;
+    });
+    
+    c.innerHTML=html;
 }
 
 async function init(){
@@ -408,6 +472,8 @@ function updateAdminUI(){
     if(lbBtn) lbBtn.style.display = isAdmin ? 'inline-block' : 'none';
     const fetchBtn = document.getElementById('fetchBtn');
     if(fetchBtn && !isAdmin) fetchBtn.style.display = 'none';
+    const downloadBtn = document.getElementById('downloadBtn');
+    if(downloadBtn) downloadBtn.style.display = isAdmin ? 'inline-block' : 'none';
 }
 
 init();
