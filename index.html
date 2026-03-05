@@ -80,7 +80,7 @@
     <div class="eyebrow">2026 PGA Tour Full-Field Event</div>
     <h1>Arnold Palmer<br><span>Invitational Pool</span></h1>
     <div class="divider"></div>
-    <p class="sub">March 5-8 · Bay Hill Club Feb 26–Mar 1 · PGA National Resort, Palm Beach Gardens Lodge, Orlando</p>
+    <p class="sub">March 5-8 · Bay Hill Club & Lodge, Orlando</p>
     </header>
 
     <div class="tabs">
@@ -188,6 +188,7 @@ async function loadData(force=false){
         participants=d?.participants||[];
         golferScores=d?.golferScores||{};
         missedCuts=new Set(d?.missedCuts||[]);
+        console.log('Loaded data:', {participants: participants.length, golferScores: Object.keys(golferScores).length});
     }
     catch(e){
         console.error('Error loading data:', e);
