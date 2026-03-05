@@ -137,7 +137,7 @@
 <script>
 const SUPABASE_URL = 'https://dhcuseybeoybnagiezbc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRoY3VzZXliZW95Ym5hZ2llemJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4NDUyMTIsImV4cCI6MjA4NzQyMTIxMn0.0SPoLKflZjpgXDASm7dlZuo7IY4YoRO0gmazJJOeAUA';
-const TSTART = new Date('2026-03-06T08:00:00-05:00');
+const TSTART = new Date('2026-03-05T08:00:00-04:00');
 
 const GROUPS = {
     group1:{label:'Group 1',tier:'1',golfers:['Rory McIlroy','Scottie Scheffler']},
@@ -372,8 +372,8 @@ function startAutoRefresh(){
         const t=new Date();
         const day=t.getDay();
         const hour=t.getHours();
-        const start=new Date('2026-03-06T08:00:00-05:00');
-        const end=new Date('2026-03-08T20:00:00-05:00');
+        const start=new Date('2026-03-05T08:00:00-04:00');
+        const end=new Date('2026-03-08T20:00:00-04:00');
         if(t>=start&&t<=end&&((day>=3&&day<=6)||(day===0&&t<end))&&hour>=8&&hour<20){
             console.log('Auto-refreshing scores at',new Date().toLocaleTimeString());
             fetchLiveScores(false);
