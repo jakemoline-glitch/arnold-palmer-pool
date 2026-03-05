@@ -229,12 +229,19 @@ async function submitEntry(){
     const email=document.getElementById('email').value.trim();
     const winScore=document.getElementById('winScore').value.trim();
     if(!name||!email){alert('Please enter your name and email');return;}
-    if(!visible()&&!isAdmin){alert('⏰ Picks are locked — tournament has started');return;}
+    if(visible()&&!isAdmin){alert('⏰ Picks are locked — tournament has started');return;}
     const picks={};
     for(const k of Object.keys(GROUPS)){
         const v=document.getElementById(k).value;
         if(!v){alert(`Please select a golfer from ${GROUPS[k].label}`);return;}
         picks[k]=v;
+    }
+    // Check for duplicate golfers
+    const selectedGolfers=Object.values(picks);
+    const uniqueGolfers=new Set(selectedGolfers);
+    if(selectedGolfers.length!==uniqueGolfers.size){
+        alert('❌ You cannot select the same golfer multiple times. Please choose different golfers.');
+        return;
     }
     if(!winScore){alert('Please predict the winning score');return;}
     await loadData(true);
